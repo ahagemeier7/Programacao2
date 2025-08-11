@@ -3,8 +3,8 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    require_once 'ProductClass.php';
-    require_once 'FirstClass.php';
+    require_once './ProductClass.php';
+    require_once './FirstClass.php';
 
     $product = new Product(name: "produto1", price:10 ,quantity:5);
 
