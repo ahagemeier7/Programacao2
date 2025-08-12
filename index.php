@@ -3,19 +3,62 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    require_once './ProductClass.php';
-    require_once './FirstClass.php';
+    
+    require_once 'FirstClass.php';
+    $carro = new Carro();
+    $carro->marca = 'Fiat';
+    $carro->modelo = 'Uno';
+    $carro->ano = 2005;
+    
+    require_once 'Student.php';
+    $aluno = new Student();
+    $aluno->nome = 'joao';
+    $aluno->media = 6.5;
+    
+    require_once 'ContaBancaria.php';
+    $conta = new ContaBancaria();
+    $conta->titular = 'joao';
+    $conta->saldo = 500;
 
-    $product = new Product(name: "produto1", price:10 ,quantity:5);
+    require_once 'Calculadora.php';
+    $calculadora = new Calculadora();
 
-    $person1 = new Person(name: "person1",age: 14);
-    $person2 = new Person(name: "person2",age: 20);
-    $person3 = new Person(name: "person3",age: 30);
+    require_once 'Agenda.php';
+    $agenda1 = new Agenda(nome: "person1",telefone: 99999999,email: "joao@a1235");
+    $agenda2 = new Agenda(nome: "person2",telefone: 35331234,email: "joao@a1234");
+    $agenda3 = new Agenda(nome: "person3",telefone:49999123,email: "joao@a123");
 
-    $personArray = [$person1, $person2, $person3];
+    $agendaArray = [$agenda1,$agenda2,$agenda3];
 
+    require_once 'Retangulo.php';
+    $retangulo = new Retangulo();
+    $retangulo->altura = 2;
+    $retangulo->largura = 4;
 
+    require_once 'Funcionario.php';
+    $funcionario = new Funcionario();
+    $funcionario->nome = 'joao';
+    $funcionario->salario = 1000;
 
+    require_once 'Carrinho.php';
+    $carrinho = new Carrinho([]);
+    $item1 = new Item(1, "item1",10);
+    $item2 = new Item(1, "item2",30);
+
+    $carrinho->itens = [$item1,$item2];
+
+    require_once 'Livro.php';
+    $livro1 = new Livro("Livro 1", "Autor 1", 2000);
+    $livro2 = new Livro("Livro 2", "Autor 2", 2016);
+    $livro3 = new Livro("Livro 3", "Autor 3", 2018);
+
+    $estante = [$livro1, $livro2, $livro3];
+
+    require_once 'Conversor.php';
+    $conversor = new Conversor();
+    $conversor->celsius = 25;
+
+    
     if (! empty($_GET['q'])) {
         $query = htmlspecialchars($_GET['q'], ENT_QUOTES, 'UTF-8');
 
@@ -129,14 +172,56 @@
     <div>
         <p>
             <?php
-            echo $product->TotalValue();
-            echo $product->ShowDetails();
-
-
-                foreach ( $personArray as $persons ) {
-                    echo $persons->DisplayData() ;
+                $carro->exibirInformacoes();
+                echo "--------------------------------------\n";
+                $aluno->verificarAprovacao();
+                echo "--------------------------------------\n";
+                $conta->depositar(200);
+                echo "$conta->saldo";
+                echo "\n";
+                $conta->sacar(500);
+                echo "$conta->saldo";
+                echo "--------------------------------------\n";
+                echo "\n";
+                echo "\n";
+                $calculadora->soma(1,1);
+                echo "\n";
+                $calculadora->subtracao(5,1);
+                echo "\n";
+                $calculadora->multiplicacao(2,1);
+                echo "\n";
+                $calculadora->divisao(10,1);
+                echo "\n";
+                echo "$conta->saldo";
+                echo "--------------------------------------\n";
+                foreach ($agendaArray as $agendas ){
+                    $agendas->lista();
                 }
-            ?>
+                echo "--------------------------------------\n";
+                $retangulo->calculaArea();
+                echo "\n";
+                $retangulo->calculaPerimetro();
+                echo "--------------------------------------\n";
+                $funcionario->reajuste(10);
+                echo "--------------------------------------\n";
+                $valorToral = 0;
+                    foreach ($carrinho->itens as $item) {
+                        $valorToral += $item->valor;
+                        echo $item->valor;
+                        echo "\n";
+
+                    }
+                echo $valorToral;
+                echo "--------------------------------------\n";
+                foreach ($estante as $livro) {
+                    if($livro->ano > 2015) {
+                        echo "Título: {$livro->nome}, Autor: {$livro->autor}, Ano: {$livro->ano}\n";
+                    }
+                }
+                echo "--------------------------------------\n";
+                echo $conversor->conversor();
+
+                ?>
         </p>
     </div>
 </body>
