@@ -60,20 +60,6 @@ if (isset($_POST['cadastrar_aluguel'])) {
     }
 }
 
-// Cadastro de Favorito (muitos para muitos)
-if (isset($_POST['cadastrar_favorito'])) {
-    $idCliente = intval($_POST['id_cliente_fav']);
-    $idFilme = intval($_POST['id_filme_fav']);
-    if (isset($clientes[$idCliente]) && isset($filmes[$idFilme])) {
-        $favorito = new Favorito($clientes[$idCliente], $filmes[$idFilme]);
-        $favoritos[] = $favorito;
-        $clientes[$idCliente]->adicionarFavorito($filmes[$idFilme]);
-        $filmes[$idFilme]->adicionarFavoritadoPor($clientes[$idCliente]);
-        $mensagem = "Favorito cadastrado!";
-    } else {
-        $mensagem = "Cliente ou Filme não encontrado!";
-    }
-}
 ?>
 
 <!DOCTYPE html>

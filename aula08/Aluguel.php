@@ -8,6 +8,7 @@ class Aluguel {
     private string $DataFim;
     private float $Desconto;
     private float $Valor;
+    private Multa $Multa
 
     public function __construct(
         Cliente $cliente,
